@@ -1,0 +1,23 @@
+{
+  "name": "busdriver",
+  "version": "0.0.1",
+  "description": "",
+  "main": "EventBus.js",
+  "scripts": {
+    "test": "jest",
+    "test:coverage": "jest --coverage"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bmahlbrand/busdriver-js.git"
+  },
+  "author": "Benjamin Ahlbrand",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bmahlbrand/busdriver-js/issues"
+  },
+  "homepage": "https://github.com/bmahlbrand/busdriver-js#readme",
+  "dependencies": {
+    "jest": "^25.1.0"
+  }
+}
