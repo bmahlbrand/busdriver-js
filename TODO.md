@@ -15,3 +15,5 @@ TODO:
 - potentially deal with references vs copying messages (since all subscribers get a reference to the same object)
 - track previous message sent to topic to determine if it should publish or not (publishOn)
 - duplex communication
+- persistent copy of queue / topics
+- Messages vs Events vs Commands
