@@ -77,4 +77,4 @@ class MessageBus {
     }
 };
 
-module.exports = EventBus;
+module.exports = MessageBus;
