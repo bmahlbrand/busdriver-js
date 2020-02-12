@@ -2,5 +2,7 @@ language: node_js
 
 node_js:
 - node
-
+sudo: false
 cache: npm
+script: "npm run test:cov"
+after_script: "npm run deps"
