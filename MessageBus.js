@@ -4,8 +4,11 @@
 // browser + node compatibility
 // decorators
 // change unique id to some hashing algorithm
+// prefix matching
+// wildcard matching
+// set matching mode in subscribe call (default: null)
 
-class EventBus {
+class MessageBus {
     constructor() {
         this.callbacks = {};
         this.currentId = 0;
