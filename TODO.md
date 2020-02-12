@@ -1,0 +1,17 @@
+TODO:
+- priority scheduling
+- this + networking - linearizability...
+- browser + node compatibility
+- decorators
+- change unique id to some hashing algorithm
+- pattern matching
+- prefix matching
+- wildcard matching
+- set matching mode in subscribe call (default: exact)
+- per channel schemas for message types - i.e. enforce validity
+- persistent configurations
+- queues per channel for deferred streams (i.e. grab events when they're ready)
+- add topics within channels
+- potentially deal with references vs copying messages (since all subscribers get a reference to the same object)
+- track previous message sent to topic to determine if it should publish or not (publishOn)
+- duplex communication
