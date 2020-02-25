@@ -1,4 +1,4 @@
-const EventBus = require("../EventBus.js");
+const { EventBus } = require("../EventBus.js");
 
 test('EventBus', () => {
 

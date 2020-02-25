@@ -52,7 +52,13 @@ class MessageBus {
             return callback(args);
         };
 
-        return id;
+        // TODO:
+        // write test for this
+        return { 
+            unsubscribe: () => {
+                return this.unsubscribe(channel, id);
+            }
+        };
 
     }
 
@@ -66,7 +72,7 @@ class MessageBus {
 
             for (const key in this.callbacks[channel]) {                
                 const obj = this.callbacks[channel][key];
-                obj.callback(event, obj.scope);
+                obj.callback(event, obj.scope, ...obj.args);
                 // obj.apply(event, obj.scope, ...obj.args);
                 // console.log(obj);
             }
@@ -77,4 +83,6 @@ class MessageBus {
     }
 };
 
-module.exports = MessageBus;
+module.exports = {
+    MessageBus: MessageBus
+};
