@@ -41,12 +41,14 @@ class MessageBus {
 
     // useful for one-time events,
     // removes the callback after only one use
-    subscribeOneShot(channel, callback) {
+    subscribeOneShot(channel, callback, scope, ...args) {
         const id = this.uniqueId();
 
         if (!this.callbacks[channel])
             this.callbacks[channel] = {};
 
+        // TODO:
+        // fix this wrt scope / args
         this.callbacks[channel][id] = (args) => {
             this.unsubscribe(channel, id);
             return callback(args);
@@ -72,7 +74,7 @@ class MessageBus {
 
             for (const key in this.callbacks[channel]) {                
                 const obj = this.callbacks[channel][key];
-                obj.callback(event, ...args);
+                obj.callback(event, obj.scope, ...args);
                 // obj.apply(event, obj.scope, ...obj.args);
                 // console.log(obj);
             }

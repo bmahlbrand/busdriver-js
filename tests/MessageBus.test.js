@@ -1,15 +1,15 @@
-const { EventBus } = require("../EventBus.js");
+const { MessageBus } = require("../MessageBus.js");
 
-test('EventBus', () => {
+test('MessageBus', () => {
 
-    const bus = new EventBus();
+    const bus = new MessageBus();
     expect(bus).not.toBeNull();
 
 });
 
-test('EventBus:uniqueId', () => {
+test('MessageBus:uniqueId', () => {
 
-    const bus = new EventBus();
+    const bus = new MessageBus();
 
     expect(bus.uniqueId()).toEqual(0);
     expect(bus.uniqueId()).toEqual(1);
@@ -17,9 +17,9 @@ test('EventBus:uniqueId', () => {
 
 });
 
-test('EventBus: subscribe / unsubscribe', () => {
+test('MessageBus: subscribe / unsubscribe', () => {
 
-    const bus = new EventBus();
+    const bus = new MessageBus();
 
     const platformToken1 = bus.subscribe("platform", (json) => {});
 
@@ -47,11 +47,21 @@ test('EventBus: subscribe / unsubscribe', () => {
     const subscribers4 = bus.subscribers("platform");
     expect(subscribers4).toEqual(["2"]);
 
+    const oneshotToken = bus.subscribeOneShot("platform", (json) => {
+        console.log("had");
+    });
+
+    const subscribers5 = bus.subscribers("platform");
+    console.log(subscribers5);
+    oneshotToken.unsubscribe();
+
+    expect(subscribers5).toEqual(["2"]);
+
 });
 
-test('EventBus: scope', () => {
+test('MessageBus: scope', () => {
 
-    const bus = new EventBus();
+    const bus = new MessageBus();
 
     class Class1 {
         constructor() {
@@ -78,3 +88,4 @@ test('EventBus: scope', () => {
     let t2 = new Class2();
     t2.fire();
 });
+
