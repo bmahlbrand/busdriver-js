@@ -67,12 +67,12 @@ class MessageBus {
         return Object.keys(this.callbacks[channel]);
     }
 
-    publish(channel, event) {
+    publish(channel, event, ...args) {
         if (channel in this.callbacks && Object.keys(this.callbacks[channel]).length > 0) {
 
             for (const key in this.callbacks[channel]) {                
                 const obj = this.callbacks[channel][key];
-                obj.callback(event, obj.scope, ...obj.args);
+                obj.callback(event, ...args);
                 // obj.apply(event, obj.scope, ...obj.args);
                 // console.log(obj);
             }
