@@ -20,3 +20,4 @@ TODO:
 - in subscribe handle immediate vs once per frame vs queued for event handling
 - prepend, prependOnce
 - think through nested events
+- robust error handling
