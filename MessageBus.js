@@ -47,12 +47,15 @@ class MessageBus {
         if (!this.callbacks[channel])
             this.callbacks[channel] = {};
 
-        // TODO:
-        // fix this wrt scope / args
-        this.callbacks[channel][id] = (args) => {
+        this.callbacks[channel][id] = {callback: (args) => {
             this.unsubscribe(channel, id);
             return callback(args);
-        };
+        }, scope, args};
+        console.log(this.callbacks[channel][id]);
+        // this.callbacks[channel][id] = (args) => {
+        //     this.unsubscribe(channel, id);
+        //     return callback(args);
+        // };
 
         // TODO:
         // write test for this
@@ -69,12 +72,12 @@ class MessageBus {
         return Object.keys(this.callbacks[channel]);
     }
 
-    publish(channel, event, ...args) {
+    publish(channel, ...args) {
         if (channel in this.callbacks && Object.keys(this.callbacks[channel]).length > 0) {
 
             for (const key in this.callbacks[channel]) {                
                 const obj = this.callbacks[channel][key];
-                obj.callback(event, obj.scope, ...args);
+                obj.callback(...args);
                 // obj.apply(event, obj.scope, ...obj.args);
                 // console.log(obj);
             }
