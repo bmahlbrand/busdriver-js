@@ -52,10 +52,10 @@ test('MessageBus: subscribe / unsubscribe', () => {
     });
 
     const subscribers5 = bus.subscribers("platform");
-    console.log(subscribers5);
+    // console.log(subscribers5);
     oneshotToken.unsubscribe();
 
-    expect(subscribers5).toEqual(["2"]);
+    expect(bus.subscribers("platform")).toEqual(["2"]);
 
 });
 
@@ -89,3 +89,43 @@ test('MessageBus: scope', () => {
     t2.fire();
 });
 
+test('MessageBus: publish', () => {
+    const bus = new MessageBus();
+
+    const platformToken1 = bus.subscribe("platform", (json, string) => {
+        expect(json).toEqual({jsonstuff:"", nm: [2,2,2]});
+        expect(string).toEqual("stuff");
+    });
+    const platformToken2 = bus.subscribe("platform", (json, string) => {
+        expect(json).toEqual({jsonstuff:"", nm: [2,2,2]});
+        expect(string).toEqual("stuff");
+    });
+    const platformToken3 = bus.subscribe("platform", (json, string) => {
+        expect(json).toEqual({jsonstuff:"", nm: [2,2,2]});
+        expect(string).toEqual("stuff");
+    });
+
+    bus.publish("platform", {jsonstuff:"", nm: [2,2,2]}, "stuff");
+});
+
+test('MessageBus: publish defer', () => {
+
+    const bus = new MessageBus();
+    bus.setDeferred(true);
+
+    const platformToken1 = bus.subscribe("platform", (json, string) => {
+        expect(json).toEqual({jsonstuff:"", nm: [2,2,2]});
+        expect(string).toEqual("stuff");
+    });
+    const platformToken2 = bus.subscribe("platform", (json, string) => {
+        expect(json).toEqual({jsonstuff:"", nm: [2,2,2]});
+        expect(string).toEqual("stuff");
+    });
+    const platformToken3 = bus.subscribe("platform", (json, string) => {
+        expect(json).toEqual({jsonstuff:"", nm: [2,2,2]});
+        expect(string).toEqual("stuff");
+    });
+
+    bus.publish("platform", {jsonstuff:"", nm: [2,2,2]}, "stuff");
+    bus.flush();
+});
