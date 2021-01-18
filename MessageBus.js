@@ -106,7 +106,7 @@ class MessageBus {
     publish(channel, ...args) {
         if (this.deferred) {
             if (this.queue.size() === this.queue.capacity()) {
-                console.log('dropping messages ' + this.queue.get(this.queue.size() - 1));
+                console.log(channel + ' dropping message ' + this.queue.get(this.queue.size() - 1));
             }
 
             const event = {
